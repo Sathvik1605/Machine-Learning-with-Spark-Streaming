@@ -21,6 +21,7 @@ parser.add_argument('--batch-size', '-b', help='Batch size',
 parser.add_argument('--endless', '-e', help='Enable endless stream',
                     required=False, type=bool, default=False)  # looping disabled by default
 
+
 TCP_IP = "localhost"
 TCP_PORT = 6100
 
