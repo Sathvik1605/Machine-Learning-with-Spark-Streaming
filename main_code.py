@@ -19,7 +19,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 
 
+sc = SparkContext(appName="stream")
+ssc = StreamingContext(sc, 5)
+spark = SparkSession(sc)
+schema = StructType([StructField("feature0", StringType(), True), StructField("feature1", StringType(), True), StructField("feature2", StringType(), True)])
 
+lines = ssc.socketTextStream("localhost", 6100)
+lines.foreachRDD(main)
 		
 clf1 = MultinomialNB()
 clf2 = Perceptron()
@@ -108,18 +114,7 @@ def main(lines):
 		print("Precision Score: ", prec_scr3)
 		print("Recall Score: ", rec_score3)
 
-		
-
-
-
-sc = SparkContext(appName="stream")
-ssc = StreamingContext(sc, 5)
-spark = SparkSession(sc)
-schema = StructType([StructField("feature0", StringType(), True), StructField("feature1", StringType(), True), StructField("feature2", StringType(), True)])
-
-lines = ssc.socketTextStream("localhost", 6100)
-lines.foreachRDD(main)
-
+	
 ssc.start()
 ssc.awaitTermination()
 ssc.stop()
