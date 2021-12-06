@@ -60,7 +60,7 @@ def main(lines):
 		pred1 = model1.predict(x_test)
 		
 		accu_scr1 = accuracy_score(pred1,y_test)
-		prec_scr1 = precision_score(pred1,y_test)
+		prec_scr1 = precision_score(y_test,pred1)
 		rec_score1 = recall_score(pred1,y_test)
 
 		print("Model 1")
@@ -73,7 +73,7 @@ def main(lines):
 		pred2 = model2.predict(x_test)
 		
 		accu_scr2 = accuracy_score(pred2,y_test)
-		prec_scr2 = precision_score(pred2,y_test)
+		prec_scr2 = precision_score(y_test,pred2)
 		rec_score2 = recall_score(pred2,y_test)
 		
 		print("Model 2")
@@ -87,7 +87,7 @@ def main(lines):
 		pred3 = model3.predict(x_test)
 		
 		accu_scr3 = accuracy_score(pred3,y_test)
-		prec_scr3 = precision_score(pred3,y_test)
+		prec_scr3 = precision_score(y_test,pred3)
 		rec_score3 = recall_score(pred3,y_test)
 		
 		print("Model 2")
