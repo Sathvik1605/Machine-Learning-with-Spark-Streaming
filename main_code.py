@@ -38,7 +38,6 @@ def stop_word_removal(x):
 	keep = [i for i in x.split() if i.lower() not in remove]
 	cleaned = " ".join(keep)
 	return cleaned
-	
 
 def dataclean(df):						
 	df = df.withColumn('length',length(df['feature1']))
@@ -63,13 +62,11 @@ def main(lines):
 		removed1 = udf(stop_word_removal, StringType())
 		df1 = df0.withColumn("feature0", removed1(df0["feature0"]))
 		df1 = dataclean(df1)
-				
-		
+						
 		labelEncoder = le.fit_transform(np.array([i["feature2"] for i in df1.collect()]))				
 		data = df1.collect()
 		vectorizer = v.fit_transform([" ".join([j["feature0"], j["feature1"]]) for j in data])
-
-		
+	
 		x_train, x_test, y_train, y_test = train_test_split(vectorizer, labelEncoder, test_size = 0.5)
 		
 		model1 = clf1.partial_fit(x_train, y_train, classes = np.unique(y_train))
